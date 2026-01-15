@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spire3D | Innovation in Motion</title>
+    <style>
+        :root {
+            --primary-dark: #0b0c15;
+            --secondary-dark: #1a1b26;
+            --accent-cyan: #00bcd4;
+            --accent-purple: #7c4dff;
+            --text-light: #ffffff;
+            --text-gray: #b0b0b0;
+            --card-bg: #232433;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: rgba(11, 12, 21, 0.95);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-container img {
+            height: 50px; /* Adjust based on your preference */
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: radial-gradient(circle at center, #1a1b26 0%, #000000 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('Spire3D innovation in motion.png') no-repeat center center;
+            background-size: contain;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.4);
+        }
+
+        /* Collections / Shop Section */
+        .section {
+            padding: 5rem 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-cyan);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid #333;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+        }
+
+        .card-img-placeholder {
+            height: 200px;
+            background-color: #2a2b3d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 3rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Services Section */
+        .services {
+            background-color: var(--secondary-dark);
+        }
+
+        .service-item {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            nav ul {
+                display: none; /* Simple mobile hide for template */
+            }
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000;
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-gray);
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="Spire3D innovation in motion.png" alt="Spire3D Logo">
+            <span class="logo-text">Spire3D</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#collections">Shop</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>INNOVATE. CREATE. PRINT.</h1>
+            <p>Bringing your ideas to life with precision 3D printing technology. From rapid prototyping to custom collectibles.</p>
+            <a href="#collections" class="btn">Explore Collections</a>
+        </div>
+    </section>
+
+    <section id="collections" class="section">
+        <h2 class="section-title">Featured Collections</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img-placeholder">🐲</div>
+                <div class="card-content">
+                    <h3 class="card-title">Articulated Dragons</h3>
+                    <p class="card-text">Fully flexible, intricate designs printed in multi-color silk filaments.</p>
+                    <a href="#" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">View All</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img-placeholder">⚙️</div>
+                <div class="card-content">
+                    <h3 class="card-title">Fidgets & Sensory</h3>
+                    <p class="card-text">Satisfying spinners, gears, and haptic toys for focus and fun.</p>
+                    <a href="#" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">View All</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img-placeholder">🛠️</div>
+                <div class="card-content">
+                    <h3 class="card-title">Functional Parts</h3>
+                    <p class="card-text">Replacement gears, brackets, and custom tools for everyday fixes.</p>
+                    <a href="#" class="btn" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">View All</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="grid">
+            <div class="service-item">
+                <div class="service-icon">🖨️</div>
+                <h3>Custom Printing</h3>
+                <p>Upload your STL files and we'll print them in high-quality PLA, PETG, or TPU.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">💡</div>
+                <h3>Design & Prototyping</h3>
+                <p>Have an idea? We offer CAD design services to turn sketches into 3D models.</p>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">🔧</div>
+                <h3>Printer Repair</h3>
+                <p>Trouble with your own machine? Our experts can help diagnose and fix issues.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="about-grid">
+            <div>
+                <h2 class="section-title" style="text-align: left; margin-left: 0;">About Spire3D</h2>
+                <p style="margin-bottom: 1rem;">
+                    Spire3D began with a simple mission: to bridge the gap between digital imagination and physical reality. 
+                    Similar to our friends in the industry, we started with a single printer and a passion for creation.
+                </p>
+                <p style="margin-bottom: 1rem;">
+                    We specialize in high-quality FDM printing, offering everything from fun, articulated toys that spark joy 
+                    to functional prototypes that solve real-world problems.
+                </p>
+                <p>
+                    <strong>Quality and Affordability</strong> is our #1 priority. Whether you are a hobbyist, a parent, or an engineer, 
+                    Spire3D is your partner in innovation.
+                </p>
+            </div>
+            <div style="text-align: center;">
+                <img src="Spire3D innovation in motion.png" alt="Spire3D Shield" style="max-width: 80%; height: auto; filter: drop-shadow(0 0 20px rgba(124, 77, 255, 0.3));">
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#collections">Shop</a>
+            <a href="index.html#services">Services</a>
+            <a href="index.html#about">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Spire3D. All rights reserved. <br>
+            Powered by Innovation.
+        </div>
+    </footer>
+
+</body>
+</html>

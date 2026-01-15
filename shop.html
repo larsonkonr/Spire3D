@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spire3D | Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: transform 0.3s;
+        }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--accent-cyan); }
+        .product-img {
+            height: 250px;
+            background-color: #2a2b3d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        .product-info { padding: 1.5rem; }
+        .price { color: var(--accent-cyan); font-weight: bold; font-size: 1.1rem; margin-top: 0.5rem; display: block;}
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-container">
+            <img src="Spire3D innovation in motion.png" alt="Spire3D Logo">
+            <span class="logo-text">Spire3D</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html" class="active">Shop</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Shop Collections</h1>
+        <p style="color: var(--text-gray);">Unique 3D printed items, shipped to your door.</p>
+    </div>
+
+    <section class="section">
+        <div class="shop-grid">
+            <div class="product-card">
+                <div class="product-img">🐲</div>
+                <div class="product-info">
+                    <h3>Crystal Dragon</h3>
+                    <p style="color: #aaa; font-size: 0.9rem;">Multi-color silk PLA</p>
+                    <span class="price">$25.00</span>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">⚙️</div>
+                <div class="product-info">
+                    <h3>Mechanical Gyro</h3>
+                    <p style="color: #aaa; font-size: 0.9rem;">High speed bearings</p>
+                    <span class="price">$15.00</span>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">💀</div>
+                <div class="product-info">
+                    <h3>Voronoi Skull</h3>
+                    <p style="color: #aaa; font-size: 0.9rem;">Matte Black finish</p>
+                    <span class="price">$30.00</span>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">🪴</div>
+                <div class="product-info">
+                    <h3>Geometric Planter</h3>
+                    <p style="color: #aaa; font-size: 0.9rem;">Watertight PETG</p>
+                    <span class="price">$22.00</span>
+                    <button class="btn" style="width: 100%; margin-top: 1rem;">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="copyright">&copy; 2026 Spire3D. Powered by Innovation.</div>
+    </footer>
+
+</body>
+</html>

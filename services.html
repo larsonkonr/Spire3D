@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spire3D | Services</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .service-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            background: rgba(255,255,255,0.02);
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        .service-icon-lg {
+            font-size: 4rem;
+            color: var(--accent-purple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #333;
+        }
+        @media (max-width: 768px) {
+            .service-row { grid-template-columns: 1fr; text-align: center; }
+            .service-icon-lg { border-right: none; border-bottom: 1px solid #333; padding-bottom: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo-container">
+            <img src="Spire3D innovation in motion.png" alt="Spire3D Logo">
+            <span class="logo-text">Spire3D</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Our Services</h1>
+        <p style="color: var(--text-gray);">Professional 3D Printing & Design Solutions</p>
+    </div>
+
+    <section class="section">
+        
+        <div class="service-row">
+            <div class="service-icon-lg">🖨️</div>
+            <div>
+                <h2>FDM Printing on Demand</h2>
+                <p style="margin: 1rem 0; color: #ccc;">
+                    We offer high-quality Fused Deposition Modeling (FDM) printing. Send us your STL, OBJ, or 3MF files, 
+                    and we will print them with precision.
+                </p>
+                <ul style="list-style: inside; color: var(--text-gray);">
+                    <li>Materials: PLA, PETG, TPU, ABS, CF-Nylon</li>
+                    <li>Max Build Volume: 300 x 300 x 300mm</li>
+                    <li>Layer Height: 0.1mm - 0.3mm</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <div class="service-icon-lg">✏️</div>
+            <div>
+                <h2>CAD Design & Prototyping</h2>
+                <p style="margin: 1rem 0; color: #ccc;">
+                    Don't have a 3D file? No problem. Our engineers can take your napkin sketch or 2D drawing 
+                    and turn it into a print-ready 3D model using Fusion 360 and SolidWorks.
+                </p>
+                <ul style="list-style: inside; color: var(--text-gray);">
+                    <li>Reverse Engineering</li>
+                    <li>Functional Part Design</li>
+                    <li>Rapid Prototyping Iterations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="service-row">
+            <div class="service-icon-lg">📦</div>
+            <div>
+                <h2>Small Batch Production</h2>
+                <p style="margin: 1rem 0; color: #ccc;">
+                    Need 50 or 100 units of a part? We offer competitive pricing for small-batch manufacturing runs, 
+                    bridging the gap before you move to injection molding.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="copyright">&copy; 2026 Spire3D. Powered by Innovation.</div>
+    </footer>
+
+</body>
+</html>
