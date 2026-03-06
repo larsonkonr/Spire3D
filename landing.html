@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konr Larson - Spire3D</title>
+    <style>
+        :root {
+            --dark-blue: #0b0d17;
+            --accent-purple: #7b4397;
+            --accent-cyan: #00d2ff;
+            --text-light: #f3f4f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--dark-blue);
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .vcard {
+            background: linear-gradient(145deg, #161b33, #0b0d17);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .header-bg {
+            background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
+            height: 80px;
+            width: 100%;
+        }
+
+        .logo-container {
+            margin-top: -60px;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--dark-blue);
+            background: #000;
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 20px 30px 40px;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .title {
+            color: var(--accent-cyan);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .icon {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        .label {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            display: block;
+            text-align: left;
+        }
+
+        .value {
+            display: block;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .vcard-action {
+            margin-top: 20px;
+            display: inline-block;
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .vcard-action:hover {
+            background: var(--accent-cyan);
+            color: var(--dark-blue);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="vcard">
+        <div class="header-bg"></div>
+        <div class="logo-container">
+            <img src=https://qr.view.page/uploads/vcard/qR6QFj_c432b75cfe03fae8.png alt="Spire3D Logo" class="logo">
+        </div>
+
+        <div class="content">
+            <h1>Konr Larson</h1>
+            <p class="title">3D Printing Specialist</p>
+
+            <a href="tel:5412247731" class="contact-link">
+                <span class="icon">📞</span>
+                <div>
+                    <span class="label">Phone</span>
+                    <span class="value">(541) 224-7731</span>
+                </div>
+            </a>
+
+            <a href="mailto:larsonkonr@gmail.com" class="contact-link">
+                <span class="icon">✉️</span>
+                <div>
+                    <span class="label">Email</span>
+                    <span class="value">larsonkonr@gmail.com</span>
+                </div>
+            </a>
+
+            <a href="https://spire3d.com" target="_blank" class="contact-link">
+                <span class="icon">🌐</span>
+                <div>
+                    <span class="label">Website</span>
+                    <span class="value">spire3d.com</span>
+                </div>
+            </a>
+
+            <p style="font-size: 0.75rem; color: #4b5563; margin-top: 20px;">INNOVATE. CREATE. PRINT.</p>
+        </div>
+    </div>
+
+</body>
+</html>
