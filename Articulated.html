@@ -20,6 +20,56 @@
             --text-gray: #b0b0b0;
             --card-bg: #232433;
         }
+          /* Header & Nav */
+        header {
+            background-color: rgba(11, 12, 21, 0.95);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-container img {
+            height: 50px; /* Adjust based on your preference */
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-cyan);
+        }
 
         body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--primary-dark); color: var(--text-light); margin: 0; padding: 20px; }
         .container { max-width: 1400px; margin: 0 auto; }
@@ -1243,6 +1293,7 @@
 </body>
 
 </html>
+
 
 
 
