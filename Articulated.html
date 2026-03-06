@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Articulated Animal Catalog</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+            --accent: #e2e8f0;
+        }
+
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header { text-align: center; padding: 30px 20px; }
+        
+        .controls { position: sticky; top: 0; z-index: 100; background: var(--bg); padding: 20px 0; border-bottom: 1px solid var(--accent); }
+        .search-container { max-width: 600px; margin: 0 auto 15px; }
+        #searchInput { width: 100%; padding: 12px 20px; border-radius: 30px; border: 2px solid var(--accent); font-size: 1rem; outline: none; }
+        #searchInput:focus { border-color: var(--primary); }
+
+        .filter-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 10px; }
+        .filter-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--accent); background: white; cursor: pointer; font-weight: 500; transition: all 0.2s; }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .sub-filters { display: none; padding-top: 10px; border-top: 1px dashed var(--accent); }
+        .sub-filters.visible { display: flex; }
+
+        .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card { background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
+        .card-img { width: 100%; height: 200px; background: #e2e8f0; object-fit: cover; }
+        .card-body { padding: 15px; flex-grow: 1; }
+        .card-body h2 { margin: 0; font-size: 1.2rem; }
+        .tagline { color: var(--muted); font-size: 0.8rem; font-style: italic; display: block; margin-bottom: 8px; }
+        .description { font-size: 0.85rem; line-height: 1.4; margin-bottom: 10px; }
+        .metadata { background: #f1f5f9; padding: 8px; border-radius: 6px; font-size: 0.75rem; line-height: 1.3; }
+        
+        .no-results { text-align: center; grid-column: 1 / -1; padding: 40px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Articulated Collection</h1>
+        <p>Explore our full range of 3D-printed tactile companions</p>
+    </header>
+
+    <div class="controls">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search animals, colors, or features...">
+        </div>
+
+        <div class="filter-group" id="mainFilters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Domestic Bliss">Domestic Bliss</button>
+            <button class="filter-btn" data-filter="Garden Friends">Garden Friends</button>
+            <button class="filter-btn" data-filter="The Safari Set">The Safari Set</button>
+            <button class="filter-btn" data-filter="The Prehistoric">The Prehistoric</button>
+            <button class="filter-btn" data-filter="The Exotic">The Exotic</button>
+            <button class="filter-btn" data-filter="The Farm">The Farm</button>
+        </div>
+
+        <div class="filter-group sub-filters" id="exoticSubFilters">
+            <button class="filter-btn active" data-sub="all">All Exotic</button>
+            <button class="filter-btn" data-sub="Ocean">Ocean</button>
+            <button class="filter-btn" data-sub="Mythical">Mythical</button>
+            <button class="filter-btn" data-sub="Space">Space</button>
+            <button class="filter-btn" data-sub="Wild">Wild & Unique</button>
+        </div>
+    </div>
+
+    <main class="listings-grid" id="listingsGrid">
+        <article class="card" data-category="Domestic Bliss">
+            <img src="https://placehold.co/400x300?text=Bunny" class="card-img" alt="Bunny">
+            <div class="card-body">
+                <h2>🐰 Bunny (Classic & Fuzzy)</h2>
+                <span class="tagline">"The Desktop Companion"</span>
+                <p class="description">Available in sleek satin or 3D-printed "fur" texture.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Arctic White<br>
+                    <strong>Features:</strong> Glass eyes, articulated body, cotton-tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Domestic Bliss">
+            <img src="https://placehold.co/400x300?text=Cat" class="card-img" alt="Cat">
+            <div class="card-body">
+                <h2>🐱 Cat & Baby Cat</h2>
+                <span class="tagline">"The Purr-fect Pair"</span>
+                <p class="description">Articulated segments allow them to curl, stretch, and "pounce".</p>
+                <div class="metadata">
+                    <strong>Colors:</strong> Slate Grey, Sandy Tan<br>
+                    <strong>Features:</strong> Folded ears, tiny nose detail, high-flexibility joints
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Domestic Bliss">
+            <img src="https://placehold.co/400x300?text=Catfish" class="card-img" alt="Catfish">
+            <div class="card-body">
+                <h2>🐟 Catfish</h2>
+                <span class="tagline">"The Bottom-Dweller"</span>
+                <p class="description">Combines aquatic fins with a face only a cat-lover could adore.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Muddy Brown<br>
+                    <strong>Features:</strong> Pectoral and dorsal fins, whisker details
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Domestic Bliss">
+            <img src="https://placehold.co/400x300?text=Corgi" class="card-img" alt="Corgi">
+            <div class="card-body">
+                <h2>🐶 Corgi</h2>
+                <span class="tagline">"The Loaf on Legs"</span>
+                <p class="description">Captures the "sploot" perfectly with signature stubby legs.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Toasted Gold and White<br>
+                    <strong>Features:</strong> Large upright ears, heart-shaped rear
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Domestic Bliss">
+            <img src="https://placehold.co/400x300?text=Pug" class="card-img" alt="Pug">
+            <div class="card-body">
+                <h2>🐶 Pug</h2>
+                <span class="tagline">"The Wrinkly Wiggler"</span>
+                <p class="description">Captures the chunky build and big, worried eyes of a pug.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Fawn Tan or Midnight Black<br>
+                    <strong>Features:</strong> Facial wrinkles, corkscrew tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Domestic Bliss">
+            <img src="https://placehold.co/400x300?text=Dachshund" class="card-img" alt="Dachshund">
+            <div class="card-body">
+                <h2>🐕 Dachshund</h2>
+                <span class="tagline">"The Ultimate Sausage Squad"</span>
+                <p class="description">Extra-long articulated spine makes them incredibly floppy and fun.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Doxie Brown, Black, or Pastels<br>
+                    <strong>Features:</strong> Stubby legs, iconic long ears
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Domestic Bliss">
+            <img src="https://placehold.co/400x300?text=Mouse" class="card-img" alt="Mouse">
+            <div class="card-body">
+                <h2>🐭 Mouse</h2>
+                <span class="tagline">"The Tiny Traveler"</span>
+                <p class="description">Segmented body allows it to "scurry" across any surface.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Cocoa Brown with Tan tail<br>
+                    <strong>Features:</strong> Flexible tapered tail, tiny button nose
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Bee" class="card-img" alt="Bee">
+            <div class="card-body">
+                <h2>🐝 Bumblebee</h2>
+                <span class="tagline">"The Busy Buzzer"</span>
+                <p class="description">Round, striped body with tiny clear-style wings.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> High-Viz Yellow and Jet Black<br>
+                    <strong>Features:</strong> Tiny antennae, striped segments
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Frog" class="card-img" alt="Frog">
+            <div class="card-body">
+                <h2>🐸 "Butt" Frog</h2>
+                <span class="tagline">"The Roundest Ribbit"</span>
+                <p class="description">Designed to "sit" perfectly on any flat surface.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Forest Green<br>
+                    <strong>Features:</strong> Smooth matte finish, oversized eyes
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Carrot" class="card-img" alt="Carrot">
+            <div class="card-body">
+                <h2>🥕 Carrot Man</h2>
+                <span class="tagline">"The Root of All Happiness"</span>
+                <p class="description">Stands upright with little leafy tufts for hair.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Sunset Orange / Leafy Green<br>
+                    <strong>Features:</strong> Bipedal stance, "dimple" smile
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Caterpillar" class="card-img" alt="Caterpillar">
+            <div class="card-body">
+                <h2>🐛 Caterpillar</h2>
+                <span class="tagline">"The Leaf-Lover"</span>
+                <p class="description">Each segment moves independently, allowing it to "inch" along.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Neon Green<br>
+                    <strong>Features:</strong> Multi-segment wiggle action
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Crow" class="card-img" alt="Crow">
+            <div class="card-body">
+                <h2>⬛ Crow</h2>
+                <span class="tagline">"The Desktop Familiar"</span>
+                <p class="description">Segmented body allows it to "hop" or perch on your laptop.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Midnight Black<br>
+                    <strong>Features:</strong> Tail-feather articulation, perching claws
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Ladybug" class="card-img" alt="Ladybug">
+            <div class="card-body">
+                <h2>🐞 Ladybug</h2>
+                <span class="tagline">"The Lucky Charm"</span>
+                <p class="description">Vibrant addition to any indoor garden or desk setup.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Red or Yellow with Black Spots<br>
+                    <strong>Features:</strong> Wing-case segments, tiny antennae
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Snail" class="card-img" alt="Snail">
+            <div class="card-body">
+                <h2>🐌 Snail</h2>
+                <span class="tagline">"The Slow Roller"</span>
+                <p class="description">Features a beautifully spiraled, segmented shell.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Tan Body with Rainbow/Pastel Shell<br>
+                    <strong>Features:</strong> Creeping body, perky eye stalks
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Spider" class="card-img" alt="Spider">
+            <div class="card-body">
+                <h2>🕷️ Spider</h2>
+                <span class="tagline">"The Eight-Legged Fidget"</span>
+                <p class="description">Independently articulated legs allow it to "scuttle".</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Black, Red/Blue, or Neon Purple<br>
+                    <strong>Features:</strong> High-flex legs, fanged mandibles
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Squirrel" class="card-img" alt="Squirrel">
+            <div class="card-body">
+                <h2>🐿️ Squirrel</h2>
+                <span class="tagline">"The Nut Collector"</span>
+                <p class="description">Dominated by a massive, fully articulated bushy tail.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Nutmeg Brown / Cream Belly<br>
+                    <strong>Features:</strong> Articulated tail, upright ears
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="Garden Friends">
+            <img src="https://placehold.co/400x300?text=Owl" class="card-img" alt="Owl">
+            <div class="card-body">
+                <h2>🦉 Owl</h2>
+                <span class="tagline">"The Wise Watchman"</span>
+                <p class="description">Compact, rounded body makes it a sturdy library companion.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Owl Brown with White/Yellow<br>
+                    <strong>Features:</strong> Beak and talons, heart-shaped face
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Safari Set">
+            <img src="https://placehold.co/400x300?text=Lion" class="card-img" alt="Lion">
+            <div class="card-body">
+                <h2>🦁 Lion</h2>
+                <span class="tagline">"The King of the Keyboard"</span>
+                <p class="description">Stylized, chunky mane frames a friendly face.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Golden Sun Yellow / Cinnamon Mane<br>
+                    <strong>Features:</strong> Puffy mane, tufted tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Safari Set">
+            <img src="https://placehold.co/400x300?text=Elephant" class="card-img" alt="Elephant">
+            <div class="card-body">
+                <h2>🐘 Elephant</h2>
+                <span class="tagline">"The Gentle Giant"</span>
+                <p class="description">Fully articulated trunk and large floppy ears.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Stone Grey<br>
+                    <strong>Features:</strong> Moveable trunk, "Dumbo" ears
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Safari Set">
+            <img src="https://placehold.co/400x300?text=Hippo" class="card-img" alt="Hippo">
+            <div class="card-body">
+                <h2>🦏 Hippo</h2>
+                <span class="tagline">"The Hungry, Hungry Hippo"</span>
+                <p class="description">Captures the heavy-set charm of the river giant.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Pebble Grey or Lavender<br>
+                    <strong>Features:</strong> Broad nostrils, chunky profile
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Safari Set">
+            <img src="https://placehold.co/400x300?text=Giraffe" class="card-img" alt="Giraffe">
+            <div class="card-body">
+                <h2>🦒 Giraffe</h2>
+                <span class="tagline">"The High-Reach Pal" </span>
+                <p class="description">Features a long, multi-jointed neck for monitor-peeking.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Golden Yellow with Brown spots<br>
+                    <strong>Features:</strong> Neck articulation, ossicones (horns)
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Safari Set">
+            <img src="https://placehold.co/400x300?text=Monkey" class="card-img" alt="Monkey">
+            <div class="card-body">
+                <h2>🐒 Monkey</h2>
+                <span class="tagline">"The Playful Prankster"</span>
+                <p class="description">Has a long curled tail and a wide, friendly smile.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Chestnut Brown / Tan <br>
+                    <strong>Features:</strong> Hook tail, articulated limbs
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Safari Set">
+            <img src="https://placehold.co/400x300?text=Rhino" class="card-img" alt="Rhino">
+            <div class="card-body">
+                <h2>🦏 Rhino</h2>
+                <span class="tagline">"The Armored Tank"</span>
+                <p class="description">Sturdy, armored-look body with thick segments.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Stone Grey / Battle Blue<br>
+                    <strong>Features:</strong> Horn sculpt, plated body texture
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Safari Set">
+            <img src="https://placehold.co/400x300?text=Crocodile" class="card-img" alt="Crocodile">
+            <div class="card-body">
+                <h2>🐊 Crocodile & Baby</h2>
+                <span class="tagline">"The River Guardians"</span>
+                <p class="description">Textured scaly back and powerful long tail.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Swamp Green / Muddy Brown<br>
+                    <strong>Features:</strong> Rowed back scales, tail swish
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Prehistoric">
+            <img src="https://placehold.co/400x300?text=TRex" class="card-img" alt="T-Rex">
+            <div class="card-body">
+                <h2>🦖 T-Rex</h2>
+                <span class="tagline">"The Tiny Terror"</span>
+                <p class="description">Massive head and tiny articulated arms.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Jungle Green or Lava Red<br>
+                    <strong>Features:</strong> Articulated jaw, small arms
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Prehistoric">
+            <img src="https://placehold.co/400x300?text=Brontosaurus" class="card-img" alt="Bronto">
+            <div class="card-body">
+                <h2>🦖 Brontosaurus</h2>
+                <span class="tagline">"The Gentle Giant"</span>
+                <p class="description">Smiling expression and segmented neck for posing.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Lime Green<br>
+                    <strong>Features:</strong> Smile face, articulated tail/neck
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Prehistoric">
+            <img src="https://placehold.co/400x300?text=Bronto+Skeleton" class="card-img" alt="Bronto Skeleton">
+            <div class="card-body">
+                <h2>🦴 Brontosaurus Skeleton</h2>
+                <span class="tagline">"The Museum Miniature"</span>
+                <p class="description">Shows off the intricate "bone" structure of the neck.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Fossil White / Aged Bone<br>
+                    <strong>Features:</strong> Exposed ribcage, skull with sockets
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Prehistoric">
+            <img src="https://placehold.co/400x300?text=Stego" class="card-img" alt="Stego">
+            <div class="card-body">
+                <h2>🦖 Stegosaurus</h2>
+                <span class="tagline">"The Plated Pal"</span>
+                <p class="description">Row of articulated plates and a thagomizer tail.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Forest Green / Tan plates<br>
+                    <strong>Features:</strong> Iconic back plates, rounded snout
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Prehistoric">
+            <img src="https://placehold.co/400x300?text=Stego+Skeleton" class="card-img" alt="Stego Skeleton">
+            <div class="card-body">
+                <h2>🦴 Stegosaurus Skeleton</h2>
+                <span class="tagline">"The Fossilized Favorite"</span>
+                <p class="description">Articulated bony plates and clicking tail.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Aged Bone / Fossil White<br>
+                    <strong>Features:</strong> Articulated spine, iconic back plates
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Prehistoric">
+            <img src="https://placehold.co/400x300?text=Triceratops" class="card-img" alt="Triceratops">
+            <div class="card-body">
+                <h2>🦖 Triceratops</h2>
+                <span class="tagline">"The Three-Horned Hero"</span>
+                <p class="description">Tank-like dinosaur with a large head frill.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Slate Blue or Stone Grey<br>
+                    <strong>Features:</strong> Head frill, three-point horn setup
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Prehistoric">
+            <img src="https://placehold.co/400x300?text=Trice+Skeleton" class="card-img" alt="Trice Skeleton">
+            <div class="card-body">
+                <h2>🦴 Triceratops Skeleton</h2>
+                <span class="tagline">"The Three-Horned Relic"</span>
+                <p class="description">Detailed skull with boney neck frill.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Sandstone / Fossil Grey<br>
+                    <strong>Features:</strong> Hollow eye sockets, thick skeleton tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Prehistoric">
+            <img src="https://placehold.co/400x300?text=Ptero" class="card-img" alt="Pterodactyl">
+            <div class="card-body">
+                <h2>🦖 Pterodactyl</h2>
+                <span class="tagline">"The Sky-High Scout"</span>
+                <p class="description">Long, pointed crest and wide segmented wings.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Terracotta Orange / Slate Blue<br>
+                    <strong>Features:</strong> Articulated wing joints, head crest
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Prehistoric">
+            <img src="https://placehold.co/400x300?text=Ptero+Skeleton" class="card-img" alt="Ptero Skeleton">
+            <div class="card-body">
+                <h2>🦴 Pterodactyl Skeleton</h2>
+                <span class="tagline">"The Flying Fossil"</span>
+                <p class="description">Designed to look like a museum piece in mid-flight.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Fossil White / Aged Bone<br>
+                    <strong>Features:</strong> Skeletal head crest, wing joints
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Space">
+            <img src="https://placehold.co/400x300?text=Alien" class="card-img" alt="Alien">
+            <div class="card-body">
+                <h2>👽 Alien</h2>
+                <span class="tagline">"The Cosmic Companion"</span>
+                <p class="description">Large stylized head and slender highly articulated body.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Galactic Grey / Neon Green<br>
+                    <strong>Features:</strong> Glossy black eyes, flexible spine
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Space">
+            <img src="https://placehold.co/400x300?text=Alien+Skeleton" class="card-img" alt="Alien Skeleton">
+            <div class="card-body">
+                <h2>👽 Alien Skeleton</h2>
+                <span class="tagline">"The Intergalactic Specimen"</span>
+                <p class="description">Spindly, highly articulated frame with an iconic skull.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Galactic Silver / Ghostly White<br>
+                    <strong>Features:</strong> Skeletal spine/ribs, eye sockets
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Space">
+            <img src="https://placehold.co/400x300?text=Skeleton+Astronaut" class="card-img" alt="Astronaut">
+            <div class="card-body">
+                <h2>👨‍🚀 Skeleton Astronaut</h2>
+                <span class="tagline">"The Deep Space Relic"</span>
+                <p class="description">Combines a detailed space suit with a skeletal explorer.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Bone White & NASA Orange<br>
+                    <strong>Features:</strong> Exposed skeletal face, detailed suit
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Space">
+            <img src="https://placehold.co/400x300?text=UFO" class="card-img" alt="UFO">
+            <div class="card-body">
+                <h2>🛸 UFO</h2>
+                <span class="tagline">"The Out-Of-This-World Fidget"</span>
+                <p class="description">Classic saucer shape with rotating segments.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Galactic Silver / Neon Green<br>
+                    <strong>Features:</strong> "Beam-up" base detail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Space">
+            <img src="https://placehold.co/400x300?text=Robot" class="card-img" alt="Robot">
+            <div class="card-body">
+                <h2>🤖 Robot</h2>
+                <span class="tagline">"The Retro Bot"</span>
+                <p class="description">Chunky limbs and vintage-style head with mechanical movement.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Silver Metallic / Rusty Orange<br>
+                    <strong>Features:</strong> Boxy screen head, segmented torso
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Mythical">
+            <img src="https://placehold.co/400x300?text=Unicorn" class="card-img" alt="Unicorn">
+            <div class="card-body">
+                <h2>🦄 Unicorn</h2>
+                <span class="tagline">"The Sparkle Squad Leader"</span>
+                <p class="description">Majestic blunt-tipped horn and segmented body for movement.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Pearl White / Pastel Pink horn<br>
+                    <strong>Features:</strong> Spiraled horn, flowing mane
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Mythical">
+            <img src="https://placehold.co/400x300?text=Moai" class="card-img" alt="Moai">
+            <div class="card-body">
+                <h2>🗿 Moai Man</h2>
+                <span class="tagline">"The Modern Monolith"</span>
+                <p class="description">Speckled stone-like texture and expressive face.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Speckled Granite White<br>
+                    <strong>Features:</strong> Stone-mimicking filament
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Mythical">
+            <img src="https://placehold.co/400x300?text=Lucky+Dragon" class="card-img" alt="Lucky Dragon">
+            <div class="card-body">
+                <h2>🐉 Lucky Dragon</h2>
+                <span class="tagline">"The Symbol of Prosperity"</span>
+                <p class="description">Long serpentine body made of dozens of intricate links.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Imperial Gold / Jade Green<br>
+                    <strong>Features:</strong> Infinite-coil articulation, pearl-paws
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Mythical">
+            <img src="https://placehold.co/400x300?text=Dragon" class="card-img" alt="Dragon">
+            <div class="card-body">
+                <h2>🐲 Dragon (Classic/Spotted/Baby)</h2>
+                <span class="tagline">"The Mythical Legend"</span>
+                <p class="description">Can coil around your wrist or drape over a monitor.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Ruby Red, Emerald, Silk Gold<br>
+                    <strong>Features:</strong> Scale texture, majestic head sculpt
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Mythical">
+            <img src="https://placehold.co/400x300?text=Nessy" class="card-img" alt="Nessy">
+            <div class="card-body">
+                <h2>🦕 Nessy</h2>
+                <span class="tagline">"The Mystery of the Loch"</span>
+                <p class="description">Joyful smiling expression with a long neck and flippers.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Sky Blue<br>
+                    <strong>Features:</strong> Arched neck, swimming flippers
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Blue+Whale" class="card-img" alt="Blue Whale">
+            <div class="card-body">
+                <h2>🐋 Blue Whale</h2>
+                <span class="tagline">"The Gentle Deep"</span>
+                <p class="description">Long flowing segments mimic realistic swimming.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Deep Sea Blue<br>
+                    <strong>Features:</strong> Ribbed underbelly, wide flukes
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Shark" class="card-img" alt="Shark">
+            <div class="card-body">
+                <h2>🦈 Shark / Hammerhead</h2>
+                <span class="tagline">"The King of the Reef"</span>
+                <p class="description">Multi-segmented tail mimics a swimming motion.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Deep Sea Blue / Teal<br>
+                    <strong>Features:</strong> Dorsal fin, high-motion wagging tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Jellyfish" class="card-img" alt="Jellyfish">
+            <div class="card-body">
+                <h2>🪼 Jellyfish</h2>
+                <span class="tagline">"The Deep Sea Dreamer"</span>
+                <p class="description">Dozens of independent tentacle links for mesmerizing movement.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Translucent Purple / Glow Blue<br>
+                    <strong>Features:</strong> 360-degree tentacle movement
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Lobster" class="card-img" alt="Lobster">
+            <div class="card-body">
+                <h2>🦞 Lobster</h2>
+                <span class="tagline">"The Coastal King"</span>
+                <p class="description">Satisfying "clacking" sound when the segments move.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Deep Red / Cobalt Blue<br>
+                    <strong>Features:</strong> Large articulated claws, antennae
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Narwhal" class="card-img" alt="Narwhal">
+            <div class="card-body">
+                <h2>🦄 Narwhal</h2>
+                <span class="tagline">"The Unicorn of the Sea"</span>
+                <p class="description">Pastel mint body with a prominent white "tusk".</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Mint Green / Arctic White horn<br>
+                    <strong>Features:</strong> Front flippers, segmented tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Octopus" class="card-img" alt="Octopus">
+            <div class="card-body">
+                <h2>🐙 Octopus</h2>
+                <span class="tagline">"The Multi-Tasker"</span>
+                <p class="description">Eight independently articulated 3D-link tentacles.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Electric Blue<br>
+                    <strong>Features:</strong> Wide base for stability
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Starfish" class="card-img" alt="Starfish">
+            <div class="card-body">
+                <h2>⭐️ Starfish</h2>
+                <span class="tagline">"The Sea Star"</span>
+                <p class="description">Five segmented arms that can grip objects.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Sunset Orange / Sandy Yellow<br>
+                    <strong>Features:</strong> Five-way symmetry, textured skin
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Seal" class="card-img" alt="Seal">
+            <div class="card-body">
+                <h2>🦭 Seal</h2>
+                <span class="tagline">"The Slippery Sausage"</span>
+                <p class="description">Hydrodynamic shape built for "swimming" across desks.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Spotted Grey / Arctic White<br>
+                    <strong>Features:</strong> Tiny black nose, flippers
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Axolotl" class="card-img" alt="Axolotl">
+            <div class="card-body">
+                <h2>🦎 Axolotl</h2>
+                <span class="tagline">"The Smiling Salamander"</span>
+                <p class="description">Feathery external gills and a derpy grin.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Pastel Pink / Electric Blue<br>
+                    <strong>Features:</strong> Frilled gill stalks, long tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Manatee" class="card-img" alt="Manatee">
+            <div class="card-body">
+                <h2>🌊 Manatee</h2>
+                <span class="tagline">"The Sea Potato"</span>
+                <p class="description">Chunky, rounded body with paddle-like tail.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Soft Grey / Seafoam Blue<br>
+                    <strong>Features:</strong> Snout-forward expression
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Platypus" class="card-img" alt="Platypus">
+            <div class="card-body">
+                <h2>🦆 Platypus</h2>
+                <span class="tagline">"Nature's Little Puzzle"</span>
+                <p class="description">Captures the quirky waddle and swimming style.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Teal & Orange / Muddy Brown<br>
+                    <strong>Features:</strong> Flat articulated tail, duck-bill
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Otter" class="card-img" alt="Otter">
+            <div class="card-body">
+                <h2>🦦 Otter</h2>
+                <span class="tagline">"The River Guardian"</span>
+                <p class="description">Looks cute "swimming" on belly or floating on back.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Earthy Brown / Cream face<br>
+                    <strong>Features:</strong> Paddle-like tail, rounded ears
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Ocean">
+            <img src="https://placehold.co/400x300?text=Penguin" class="card-img" alt="Penguin">
+            <div class="card-body">
+                <h2>🐧 Penguin</h2>
+                <span class="tagline">"The Waddle Wonder"</span>
+                <p class="description">Classic tuxedo look with bright orange accents.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Black, White, Orange<br>
+                    <strong>Features:</strong> Orange beak, flat waddling feet
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Snake" class="card-img" alt="Snake">
+            <div class="card-body">
+                <h2>🐍 Snake / Ball Python</h2>
+                <span class="tagline">"The Infinite Fidget"</span>
+                <p class="description">Dozens of links allow it to coil and slither fluidly.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Emerald, Rainbow, or Tan<br>
+                    <strong>Features:</strong> Flicking tongue, near-limitless flex
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Bear" class="card-img" alt="Bear">
+            <div class="card-body">
+                <h2>🐻 Bear (Brown & Polar)</h2>
+                <span class="tagline">"The Forest & Frost Duo"</span>
+                <p class="description">Sturdy design with a midsection that allows "lumbering".</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Earthy Brown / Arctic White<br>
+                    <strong>Features:</strong> Rounded ears, high-durability joints
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Beaver" class="card-img" alt="Beaver">
+            <div class="card-body">
+                <h2>🦫 Beaver (Male & Female)</h2>
+                <span class="tagline">"The Busy Builders"</span>
+                <p class="description">Iconic wide flat paddle tail provides a "click".</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Timber Brown<br>
+                    <strong>Features:</strong> Large teeth detail, paddle tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Capybara" class="card-img" alt="Capybara">
+            <div class="card-body">
+                <h2>🐹 Capybara</h2>
+                <span class="tagline">"The Master of Chill"</span>
+                <p class="description">Sturdy segmented body captures the "loaf" shape.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Toasted Almond / Cocoa Snout<br>
+                    <strong>Features:</strong> Realistic profile, multi-part articulation
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Koala" class="card-img" alt="Koala">
+            <div class="card-body">
+                <h2>🐨 Koala</h2>
+                <span class="tagline">"The Eucalyptus Expert"</span>
+                <p class="description">Designed to grasp onto the rim of a monitor or cup.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Misty Grey with Black nose<br>
+                    <strong>Features:</strong> Fluffy ears, grasping limbs
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Lizard" class="card-img" alt="Lizard">
+            <div class="card-body">
+                <h2>🦎 Gecko / Lizard</h2>
+                <span class="tagline">"The Smiling Reptile"</span>
+                <p class="description">High flexibility allows it to drape over fingers.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Spotted Yellow, Neon, or Forest Green<br>
+                    <strong>Features:</strong> Fat tail or whip-like movement
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Scorpion" class="card-img" alt="Scorpion">
+            <div class="card-body">
+                <h2>🦂 Scorpion</h2>
+                <span class="tagline">"The Desert Stinger" </span>
+                <p class="description">Long tail made of independent links arches over back.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Onyx Black / Desert Gold<br>
+                    <strong>Features:</strong> Multi-link stinger, front claws
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Sloth" class="card-img" alt="Sloth">
+            <div class="card-body">
+                <h2>🦥 Sloth</h2>
+                <span class="tagline">"The Slowest Sitter"</span>
+                <p class="description">Curved limbs allow it to "hang" off pots or shelves.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Slate Brown with face mask<br>
+                    <strong>Features:</strong> Long curved claws, sleepy eyes
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Wolf" class="card-img" alt="Wolf">
+            <div class="card-body">
+                <h2>🐺 Wolf</h2>
+                <span class="tagline">"The Alpha of the Desk"</span>
+                <p class="description">Sharp fur textures allow it to crouch or "howl".</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Grey, Black, or Snowy White<br>
+                    <strong>Features:</strong> Alert ears, bushy tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=RedPanda" class="card-img" alt="Red Panda">
+            <div class="card-body">
+                <h2>🦝 Red Panda</h2>
+                <span class="tagline">"The Bamboo Bandit"</span>
+                <p class="description">Fun to pose in "climbing" positions.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Rust Red and Dark Charcoal<br>
+                    <strong>Features:</strong> Fluffy ringed tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Deer" class="card-img" alt="Deer">
+            <div class="card-body">
+                <h2>🦌 Deer</h2>
+                <span class="tagline">"The Woodland Wanderer"</span>
+                <p class="description">Peaceful, elegant print with tiny antlers.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Fawn Brown with White spots<br>
+                    <strong>Features:</strong> Delicate antlers, flick-tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Fox" class="card-img" alt="Fox">
+            <div class="card-body">
+                <h2>🦊 Fox</h2>
+                <span class="tagline">"The Clever Forest Friend"</span>
+                <p class="description">Articulation allows it to sit, pounce, or nap.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Autumn Orange with White<br>
+                    <strong>Features:</strong> Large bushy tail, alert ears
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Hedgehog" class="card-img" alt="Hedgehog">
+            <div class="card-body">
+                <h2>🦔 Hedgehog</h2>
+                <span class="tagline">"The Spiky Sweetheart"</span>
+                <p class="description">Wonderful tactile back that feels great in the hand.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Brown Spines / Cream Face<br>
+                    <strong>Features:</strong> "Quill" texture, tiny pointed nose
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Raccoon" class="card-img" alt="Raccoon">
+            <div class="card-body">
+                <h2>🦝 Raccoon / Skunk</h2>
+                <span class="tagline">"The Trash Panda"</span>
+                <p class="description">Iconic bandit mask or white stripe detailing.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Grey, Black, White accents<br>
+                    <strong>Features:</strong> Detailed mask/stripe, ringed tail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Llama" class="card-img" alt="Llama">
+            <div class="card-body">
+                <h2>🦙 Llama / Tiger</h2>
+                <span class="tagline">"No-Drama Llama"</span>
+                <p class="description">Thick wooly texture or bold stripe patterns.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Sandy Cream / Safety Orange<br>
+                    <strong>Features:</strong> Perky ears, textured coat
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Exotic" data-subcategory="Wild">
+            <img src="https://placehold.co/400x300?text=Hamster" class="card-img" alt="Hamster">
+            <div class="card-body">
+                <h2>🐹 Hamster / Badger</h2>
+                <span class="tagline">"The Pocket-Sized Pal"</span>
+                <p class="description">Low-maintenance pets for scurrying or purposeful waddling.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Honey / Black-White<br>
+                    <strong>Features:</strong> Chubby cheeks or facial stripes
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Farm">
+            <img src="https://placehold.co/400x300?text=Cow" class="card-img" alt="Cow">
+            <div class="card-body">
+                <h2>🐄 Cow & Spotted Cow</h2>
+                <span class="tagline">"The Highland Heifer"</span>
+                <p class="description">Soft, rounded features make it incredibly tactile.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Classic Spotted Black & White<br>
+                    <strong>Features:</strong> Tiny horns, pink snout
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Farm">
+            <img src="https://placehold.co/400x300?text=Pig" class="card-img" alt="Pig">
+            <div class="card-body">
+                <h2>🐷 Pig</h2>
+                <span class="tagline">"The Porky Playmate"</span>
+                <p class="description">Snout-forward design with a compact rounded body.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Soft Bubblegum Pinkbr>
+                    <strong>Features:</strong> Oversized snout, "ham" body
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Farm">
+            <img src="https://placehold.co/400x300?text=Sheep" class="card-img" alt="Sheep">
+            <div class="card-body">
+                <h2>🐑 Sheep</h2>
+                <span class="tagline">"The Wooly Wanderer"</span>
+                <p class="description">Heavily textured "wool" body and a smooth face.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Creamy White / Grey face<br>
+                    <strong>Features:</strong> Deep "fleece" texture
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Farm">
+            <img src="https://placehold.co/400x300?text=Chicken" class="card-img" alt="Chicken">
+            <div class="card-body">
+                <h2>🐔 Chicken</h2>
+                <span class="tagline">"The Desk Clucker"</span>
+                <p class="description">Round body sits perfectly flat and can "peck" crumbs.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Farmhouse White or Yellow<br>
+                    <strong>Features:</strong> Bright red comb and wattle
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Farm">
+            <img src="https://placehold.co/400x300?text=Goat" class="card-img" alt="Goat">
+            <div class="card-body">
+                <h2>🐐 Goat</h2>
+                <span class="tagline">"The G.O.A.T."</span>
+                <p class="description">Ready to climb anything from bookshelves to keyboards.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> White, Grey, or Tan<br>
+                    <strong>Features:</strong> Curved horns, tiny beard detail
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Farm">
+            <img src="https://placehold.co/400x300?text=Horse" class="card-img" alt="Horse">
+            <div class="card-body">
+                <h2>🐎 Horse</h2>
+                <span class="tagline">"The Galloping Guardian"</span>
+                <p class="description">Multi-part torso can be posed in a full gallop.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Chestnut, Black, or Palomino<br>
+                    <strong>Features:</strong> Detailed mane texture
+                </div>
+            </div>
+        </article>
+
+        <article class="card" data-category="The Farm">
+            <img src="https://placehold.co/400x300?text=Duck" class="card-img" alt="Duck">
+            <div class="card-body">
+                <h2>🦆 Duck</h2>
+                <span class="tagline">"The Desktop Dabbler"</span>
+                <p class="description">Articulated neck allows it to look around curiously.</p>
+                <div class="metadata">
+                    <strong>Color:</strong> Mallard Green or Yellow<br>
+                    <strong>Features:</strong> Wide flat bill, rounded wings
+                </div>
+            </div>
+        </article>
+
+        <div class="no-results" id="noResults">No listings found matching your criteria.</div>
+    </main>
+</div>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.card');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const exoticSubFilters = document.getElementById('exoticSubFilters');
+    const noResults = document.getElementById('noResults');
+
+    let currentCategory = 'all';
+    let currentSubCategory = 'all';
+
+    function filterListings() {
+        const searchTerm = searchInput.value.toLowerCase();
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const text = card.innerText.toLowerCase();
+            const category = card.getAttribute('data-category');
+            const subCategory = card.getAttribute('data-subcategory') || 'none';
+
+            const matchesSearch = text.includes(searchTerm);
+            const matchesCategory = currentCategory === 'all' || category === currentCategory;
+            
+            let matchesSubCategory = true;
+            if (currentCategory === 'The Exotic' && currentSubCategory !== 'all') {
+                matchesSubCategory = subCategory === currentSubCategory;
+            }
+
+            if (matchesSearch && matchesCategory && matchesSubCategory) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (btn.hasAttribute('data-filter')) {
+                currentCategory = btn.getAttribute('data-filter');
+                currentSubCategory = 'all';
+                
+                exoticSubFilters.classList.toggle('visible', currentCategory === 'The Exotic');
+                document.querySelectorAll('#mainFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Reset sub-filter active state
+                document.querySelectorAll('.sub-filters .filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('[data-sub="all"]').classList.add('active');
+            } else if (btn.hasAttribute('data-sub')) {
+                currentSubCategory = btn.getAttribute('data-sub');
+                document.querySelectorAll('.sub-filters .filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+            filterListings();
+        });
+    });
+
+    searchInput.addEventListener('input', filterListings);
+</script>
+</body>
+</html>
