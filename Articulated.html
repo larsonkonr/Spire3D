@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Articulated Animal Catalog</title>
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <title>Spire3D | Innovation in Motion</title>
     <style>
         :root {
             --primary: #2563eb;
@@ -27,11 +32,11 @@
         .controls { position: sticky; top: 0; z-index: 100; background: var(--primary-dark); padding: 20px 0; border-bottom: 1px solid var(--accent-purple); }
         .search-container { max-width: 600px; margin: 0 auto 15px; }
         #searchInput { width: 100%; padding: 12px 20px; border-radius: 30px; border: 2px solid var(--accent-purple); font-size: 1rem; outline: none; }
-        #searchInput:focus { border-color: var(--primary); }
+        #searchInput:focus { border-color: var(--primary-dark); }
 
         .filter-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 10px; }
         .filter-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--accent-purple); background: white; cursor: pointer; font-weight: 500; transition: all 0.2s; }
-        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        .filter-btn.active { background: var(--primary-dark); color: white; border-color: var(--primary-dark); }
 
         .sub-filters { display: none; padding-top: 10px; border-top: 1px dashed var(--accent-purple); }
         .sub-filters.visible { display: flex; }
@@ -41,7 +46,7 @@
         .card-img { width: 100%; height: 200px; background: #e2e8f0; object-fit: cover; }
         .card-body { padding: 15px; flex-grow: 1; }
         .card-body h2 { margin: 0; font-size: 1.2rem; }
-        .tagline { color: var(--muted); font-size: 0.8rem; font-style: italic; display: block; margin-bottom: 8px; }
+        .tagline { color: var(--text-gray); font-size: 0.8rem; font-style: italic; display: block; margin-bottom: 8px; }
         .description { font-size: 0.85rem; line-height: 1.4; margin-bottom: 10px; }
         .metadata { background: var(--primary-dark); padding: 8px; border-radius: 6px; font-size: 0.75rem; line-height: 1.3; }
         
@@ -1333,6 +1338,7 @@
 </body>
 
 </html>
+
 
 
 
